@@ -1,21 +1,39 @@
-<template lang="html">
-  <div class="">
-    {{saleProducts}}
-    
+<template>
+  <div class="search-character__form">
+    <form @submit.prevent
+      @submit="handleSearch()">
+
+      <div class="ui action input">
+        <input v-model="name"
+          placeholder="Character Name"
+          type="text"
+          required />
+
+          <button class="ui icon pink button">
+            <i class="search icon"></i>
+          </button>
+      </div>
+    </form>
+    {{locations}}
   </div>
 </template>
+
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
-  name: 'projectList',
-  computed: {
-    saleProducts() {
-      return this.$store.getters.saleProducts;
+  
+  data: function () {
+    return {
+      name: ''
+    }
+  },
+  computed: mapGetters([
+    'locations'
+  ]),
+  methods: {
+    handleSearch () {
+      this.$store.dispatch('FETCH_LOCATIONS', this.name)
     }
   }
 }
 </script>
-
-<style lang="scss">
-
-</style>
