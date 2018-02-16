@@ -1,20 +1,22 @@
 <template>
   <div class="search-character__form">
-    <form @submit.prevent
-      @submit="handleSearch()">
+    <form>
 
       <div class="ui action input">
         <input v-model="name"
           placeholder="Character Name"
           type="text"
-          required />
-
-          <button class="ui icon pink button">
-            <i class="search icon"></i>
-          </button>
+          @input="handleLocation()"
+          required 
+          />
       </div>
     </form>
-    {{locations}}
+    <ul >
+      <li v-for="location in locations" :key="location.woeid" @click="handleForecast(location.woeid)">{{location.title}}</li>
+    </ul>
+    {{time}}
+    {{forecast}}
+
   </div>
 </template>
 
@@ -28,11 +30,20 @@ export default {
     }
   },
   computed: mapGetters([
-    'locations'
+    'locations',
+    'forecast',
+    'time'
   ]),
   methods: {
-    handleSearch () {
-      this.$store.dispatch('FETCH_LOCATIONS', this.name)
+    handleLocation() {
+      if(this.name != '') {
+        this.$store.dispatch('FETCH_LOCATIONS', this.name)
+      } else {
+        this.$store.commit('RESET_LOCATION')
+      }
+    },
+    handleForecast(e) {
+      this.$store.dispatch('FETCH_FORECAST', e)
     }
   }
 }
