@@ -1,6 +1,6 @@
 # weather-app
 
-> A Vue.js project
+> App made for a traninig purposes
 
 ## Build Setup
 
