@@ -15,8 +15,9 @@
           <span class="location-weather-state-name">{{locationForecast[0].weather_state_name}}</span>
         </div>
         
-
+      
       </div>
+      
       <div class="card location-forecast-details" v-if="onShowDetails">
         <div class="col">{{locationSunRise}}</div>
         <div class="col">{{locationSunSet}}</div>
@@ -28,6 +29,7 @@
         <div class="col">{{locationForecast[0].wind_direction}}</div>
         <div class="col">{{locationForecast[0].wind_direction_compass}}</div>
         <div class="col">{{locationForecast[0].wind_speed}}</div>
+        <vue-chartist :data="data" :options="options" type="Line"></vue-chartist>
         <ul>
           <li v-for="fc in locationForecast" :key="fc.id">{{fc.the_temp}}</li>
         </ul>
@@ -38,11 +40,24 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import VueChartist from './Chartist.vue';
 export default {
-  
+  components: {
+    'vue-chartist': VueChartist
+  },
   data: function () {
     return {
-      name: ''
+      name: '',
+      data: {
+                labels: ['1', '2', '3', '4', '5'],
+                series: [
+                    [12, 9, 7, 8, 5]
+                ]
+            },
+            options: {
+                fullWidth: true,
+                
+            }
     }
   },
   computed: mapGetters([
@@ -101,5 +116,6 @@ export default {
     .icon-hc {background-image: url('../assets/img/icon-hc.svg');}
     .icon-lc {background-image: url('../assets/img/icon-lc.svg');}
     .icon-c {background-image: url('../assets/img/icon-c.svg');}
+
 
 </style>
