@@ -12,7 +12,6 @@
   "dependencies": {
     "axios": "^0.17.1",
     "vue": "^2.5.11",
-    "vue-chartjs": "^3.2.1",
     "vuex": "^3.0.1"
   },
   "browserslist": [
@@ -25,6 +24,8 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-3": "^6.24.1",
+    "chart.js": "^2.7.1",
+    "chartist": "^0.11.0",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.4",
